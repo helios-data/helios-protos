@@ -17,6 +17,11 @@ message Component {
   string path = 1;
   string tag = 2;
   string id = 3;
+  string location = 4;
+  string hash = 5;
+  string type = 6;
+  repeated string volumes = 7;
+  repeated string ports = 8;
 }
 
 message ComponentGroup {
