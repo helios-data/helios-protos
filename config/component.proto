@@ -22,6 +22,7 @@ message Component {
   string type = 6;
   repeated Volume volumes = 7;
   repeated Port ports = 8;
+  bool skip_spawn = 9;
 }
 
 message ComponentGroup {
