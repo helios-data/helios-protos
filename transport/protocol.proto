@@ -59,7 +59,7 @@ message EventPublish {
     string address = 1;  // Address of where the event is published to or from
     string event_type = 2;  // Type of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
     Event event = 3;  // Event to publish
-    optional string request_id = 4;  // Optional request ID for tracking the request
+    optional string request_id = 4;  // Optional request ID for tracking the request / Also used for subscription deliveries
 }
 
 /*
@@ -102,17 +102,16 @@ message EventError {
 message EventSubscribe {
     string address = 1;  // Address of where the event is subscribed to
     string event_type = 2;  // Type of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
+    string subscription_id = 3;  // Client-generated id; core tags matching EventPublish.subscription_id
 }
 
 /*
 * EventUnsubscribe Message
 *
-* Cancels a previously registered subscription for the specified address.
-* After this message is processed, the sender will no longer receive EventPublish messages for that address.
+* Cancels the subscription identified by subscription_id (same value as EventSubscribe.subscription_id).
 */
 message EventUnsubscribe {
-    string address = 1;  // Address of where the event is unsubscribed from
-    string event_type = 2;  // Type of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
+    string subscription_id = 1;
 }
 
 /*
