@@ -19,7 +19,7 @@ option go_package = "/transport";
 message HandshakeRequest {
     int32 version = 1;  // Version ID of the transport protocol
     string client_address = 2;  // Address of the client (e.g. "rocket.stage1.gps")
-    optional bool require_expected = 3;  // Require that Helios core expects this component to be present
+    optional bool must_be_registered = 3;  // Require that Helios core has this component registered/present, or reject the connection
 }
 
 /*
