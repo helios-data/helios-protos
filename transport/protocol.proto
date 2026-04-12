@@ -122,10 +122,12 @@ message EventUnsubscribe {
 */
 message TransportMessage {
     oneof message {
-        EventPublish event_publish = 1;
-        EventRequest event_request = 2;
-        EventError event_error = 3;
-        EventSubscribe event_subscribe = 4;
-        EventUnsubscribe event_unsubscribe = 5;
+        HandshakeRequest handshake_request = 1;
+        HandshakeResponse handshake_response = 2;
+        EventPublish event_publish = 3;
+        EventRequest event_request = 4;
+        EventError event_error = 5;
+        EventSubscribe event_subscribe = 6;
+        EventUnsubscribe event_unsubscribe = 7;
     }
 }
