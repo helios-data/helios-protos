@@ -40,7 +40,7 @@ message HandshakeResponse {
  */
 message Event {
     int32 id = 1;  // Unique ID of the event
-    string event_type = 2;  // Type of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
+    string event_name = 2;  // Name of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
     google.protobuf.Timestamp timestamp = 3;  // Timestamp of the event
     string source_address = 4;  // Address of the source that produced the event
     bytes data = 5;  // Payload of the event
@@ -57,7 +57,7 @@ message Event {
  */
 message EventPublish {
     string address = 1;  // Address of where the event is published to or from
-    string event_type = 2;  // Type of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
+    string event_name = 2;  // Name of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
     Event event = 3;  // Event to publish
     optional string request_id = 4;  // Optional request ID for tracking the request / Also used for subscription deliveries
 }
@@ -69,7 +69,7 @@ message EventPublish {
  */
 message EventRequest {
     string address = 1;  // Address of where the event is requested from
-    string event_type = 2;  // Type of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
+    string event_name = 2;  // Name of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
     optional string request_id = 3;  // Optional request ID for tracking the request
 }
 
@@ -87,7 +87,7 @@ message EventError {
         TIMEOUT = 4;
     }
     string address = 1;  // Address of where the error occurred
-    string event_type = 2;  // Type of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
+    string event_name = 2;  // Name of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
     ErrorCode error_code = 3;  // Code of the error
     string message = 4;  // Message of the error
     optional string request_id = 5;  // Optional request ID for tracking the request
@@ -101,8 +101,8 @@ message EventError {
  */
 message EventSubscribe {
     string address = 1;  // Address of where the event is subscribed to
-    string event_type = 2;  // Type of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
-    string subscription_id = 3;  // Client-generated id; core tags matching EventPublish.subscription_id
+    string event_name = 2;  // Name of the event (e.g. "camera_image", "gps_data", "temperature", etc.)
+    string subscription_id = 3;  // Client-generated id; core tags matching EventPublish.request_id
 }
 
 /*
