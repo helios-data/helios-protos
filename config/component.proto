@@ -35,6 +35,8 @@ message BaseComponent {
  */
 message Component {
   optional DockerSpec docker_spec = 1;  // Docker specification for the component.
+  repeated string flags = 2; // Optional flags for the component.
+  repeated string websites = 3; // Websites to open when the component is spawned.
 }
 
 /*
@@ -49,6 +51,7 @@ message DockerSpec {
   repeated Port ports = 4;  // Ports to expose from the docker container.
   string container_name = 5;  // Name of the docker container.
   bool skip_spawn = 6;  // If true, the component will not be spawned as a docker container.
+  repeated Device devices = 7;  // Devices to expose to the docker container.
 }
 
 /*
@@ -81,4 +84,14 @@ message Volume {
   string source = 1;  // Source of the volume.
   string target = 2;  // Target of the volume.
   string mode = 3;  // Mode of the volume.
+}
+
+/*
+ * Docker Device Specification.
+ *
+ * Represents a device of the docker container.
+ */
+message Device {
+  string source = 1;  // Source of the device.
+  string target = 2;  // Target of the device.
 }
