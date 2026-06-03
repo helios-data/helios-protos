@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package helios.transport;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "/transport";
+
+/*
+ * AprsPacket Message
+ *
+ * Represents a single decoded APRS packet received over RF or APRS-IS.
+ */
+message AprsPacket {
+    string source = 1;                          // Sender callsign + SSID (e.g., "KD9ABC-11")
+    string destination = 2;                     // Destination callsign (e.g., "APZH01")
+    repeated string path = 3;                   // Digipeater path (e.g., ["WIDE1-1", "WIDE2-1"])
+    optional google.protobuf.Timestamp timestamp = 4;  // Parsed packet timestamp (present on @ and / packet types)
+
+    oneof payload {
+        AprsPosition position = 5;  // Parsed position report
+        string raw_info = 6;        // Raw information field for unsupported packet types
+    }
+}
+
+/*
+ * AprsPosition Message
+ *
+ * Position data decoded from an APRS position report.
+ * Latitude/longitude are in decimal degrees; altitude in feet above MSL.
+ */
+message AprsPosition {
+    double latitude = 1;             // Decimal degrees, positive = North
+    double longitude = 2;            // Decimal degrees, positive = East
+    optional float altitude_ft = 3;  // Altitude in feet above MSL (from /A=XXXXXX in comment)
+    optional float course_deg = 4;   // Course in degrees (0–360)
+    optional float speed_knots = 5;  // Speed in knots
+    string symbol = 6;               // Two-character APRS symbol (table char + symbol char)
+    optional string comment = 7;     // Free-text comment appended to the packet
+}
