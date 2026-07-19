@@ -52,6 +52,7 @@ message DockerSpec {
   string container_name = 5;  // Name of the docker container.
   bool skip_spawn = 6;  // If true, the component will not be spawned as a docker container.
   repeated Device devices = 7;  // Devices to expose to the docker container.
+  map<string, string> env = 8;  // Environment variables to set in the docker container.
 }
 
 /*
