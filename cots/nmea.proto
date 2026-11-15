@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package helios.transport;
+package helios.cots;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package = "/transport";
+option go_package = "/cots";
 
 /*
  * NmeaSentence Message
