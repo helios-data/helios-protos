@@ -1,6 +1,8 @@
 syntax = "proto3";
 package helios.tvr;
 
+option go_package = "/tvr";
+
 message Vec2 {
   float x = 1;
   float y = 2;
@@ -25,4 +27,6 @@ enum FlightState {
   FLIGHT_STATE_RISE  = 2;
   FLIGHT_STATE_HOVER = 3;
   FLIGHT_STATE_LOWER = 4;
+  FLIGHT_STATE_ARMED  = 5;  // Armed on the pad, motors may spin
+  FLIGHT_STATE_LANDED = 6;  // Touchdown detected, motors safed
 }

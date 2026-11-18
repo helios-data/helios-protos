@@ -1,5 +1,8 @@
 syntax = "proto3";
 package helios.tvr;
+
+option go_package = "/tvr";
+
 import "common.proto";
 
 // FC health/readiness, sent at 1Hz and on state changes
@@ -13,18 +16,8 @@ message SystemStatus {
   bool accel_ok  = 4;
   bool gyro_ok   = 5;
 
-  // Fields 6/7 were baro1_ok/baro2_ok — no barometer in the downlink
-  // contract. Reserved so the tags are never reused with a different meaning.
-  reserved 6, 7;
-  reserved "baro1_ok", "baro2_ok";
-
-  // Field 8 was gps_connected — GPS dropped in favour of UWB probes.
-  // Reserved so the tag is never reused with a different meaning.
-  reserved 8;
-  reserved "gps_connected";
-
   // Radio link stats
-  uint32 radio_tx_count = 10;  // packets sent
-  uint32 radio_rx_count = 11;  // packets received
-  uint32 cmd_rx_count   = 12;  // valid commands decoded
+  uint32 radio_tx_count = 6;  // packets sent
+  uint32 radio_rx_count = 7;  // packets received
+  uint32 cmd_rx_count   = 8;  // valid commands decoded
 }
