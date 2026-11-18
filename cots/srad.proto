@@ -19,6 +19,26 @@ enum FlightState {
     LANDED = 5;
 }
 
+message Vec2 {
+  float x = 1;
+  float y = 2;
+}
+
+message Vec3 {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+message Baro {
+  bool healthy = 1;
+  float pressure = 2;
+  float temperature = 3;
+  float altitude = 4;
+  float nis = 5;
+  uint32 faults = 6;
+}
+
 message TelemetryPacket {
     // Packet metadata
     uint32 counter = 1;
@@ -28,12 +48,8 @@ message TelemetryPacket {
     FlightState state = 3;
 
     // IMU data
-    float accel_x = 4;
-    float accel_y = 5;
-    float accel_z = 6;
-    float gyro_x = 7;
-    float gyro_y = 8;
-    float gyro_z = 9;
+    Vec3 accel = 4;
+    Vec3 gyro = 5;
 
     // Kalman filter estimates
     float kf_altitude = 10;
@@ -41,23 +57,8 @@ message TelemetryPacket {
     float kf_alt_variance = 22;
     float kf_vel_variance = 23;
 
-    // Barometer health
-    bool baro0_healthy = 12;
-    bool baro1_healthy = 13;
-
-    // Barometer 0 detailed data
-    float baro0_pressure = 24;
-    float baro0_temperature = 25;
-    float baro0_altitude = 26;
-    float baro0_nis = 27;
-    uint32 baro0_faults = 28;
-
-    // Barometer 1 detailed data
-    float baro1_pressure = 29;
-    float baro1_temperature = 30;
-    float baro1_altitude = 31;
-    float baro1_nis = 32;
-    uint32 baro1_faults = 33;
+    // Barometer data
+    repeated Baro barometers = 6;
 
     // Reference
     float ground_altitude = 14;
