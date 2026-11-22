@@ -3,7 +3,7 @@ package helios.tvr;
 
 option go_package = "/tvr";
 
-import "common.proto";
+import "tvr/common.proto";
 
 // FC health/readiness, sent at 1Hz and on state changes
 message SystemStatus {

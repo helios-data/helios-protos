@@ -3,7 +3,7 @@ package helios.tvr;
 
 option go_package = "/tvr";
 
-import "common.proto";
+import "tvr/common.proto";
 
 // Full state + control output, sent at 10Hz from FC to ground station.
 //
